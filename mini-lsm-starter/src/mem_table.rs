@@ -159,7 +159,6 @@ impl MemTableIterator {
     }
 }
 
-
 impl StorageIterator for MemTableIterator {
     type KeyType<'a> = KeySlice<'a>;
 
@@ -176,11 +175,8 @@ impl StorageIterator for MemTableIterator {
     }
 
     fn next(&mut self) -> Result<()> {
-        let entry=self.with_iter_mut(
-            |iter| 
-            MemTableIterator::entry_to_item(iter.next())
-        );
-        self.with_mut(|x| *x.item=entry);
+        let entry = self.with_iter_mut(|iter| MemTableIterator::entry_to_item(iter.next()));
+        self.with_mut(|x| *x.item = entry);
         Ok(())
     }
 }
